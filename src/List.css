@@ -1,0 +1,39 @@
+
+.head{
+    display: grid;
+    grid-template-columns: 1fr 200px;
+}
+.list{
+    max-width: 960px;
+    width: 100%;
+    margin: auto;
+}
+.list input[type=text]{
+    border: 0;
+    background-color: rgb(238, 238, 238);
+    padding: 20px;
+    font-size: 20px;
+    outline: none;
+    transition: background-color ease 200ms;
+}
+.list input[type=text]:focus{
+    background-color: #d6d6d6;
+}
+.list input[type=submit]{
+    border: 0;
+    border-radius: 0;
+    background-color: #7e7e7e;
+    color: #fff;
+    font-weight: bold;
+    padding: 20px;
+    font-size: 20px;
+    outline: none;
+    transition: background-color ease 200ms;
+}
+
+.list input[type=submit]:hover{
+    background-color: #686868;
+}
+.list input[type=submit]:active{
+    background-color: #5c5c5c;
+}
