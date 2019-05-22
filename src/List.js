@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ListItem from './ListItem';
-import uuidv4 from 'uuid/v4';
+import axios from 'axios';
 import './List.css';
 
 class List extends Component {
@@ -8,23 +8,7 @@ class List extends Component {
         super(props);
         this.state = {
             searchbar: "",
-            todos: [
-                {
-                    id: uuidv4(),
-                    text: 'Create todo list',
-                    done: false
-                },
-                {
-                    id: uuidv4(),
-                    text: 'Extend todo list',
-                    done: false
-                },
-                {
-                    id: uuidv4(),
-                    text: 'Design Todos',
-                    done: false
-                }
-            ],
+            todos: [],
         }
         this.deleteHandler = this.deleteHandler.bind(this);
         this.createChangeHandler = this.createChangeHandler.bind(this);
@@ -32,32 +16,39 @@ class List extends Component {
     }
 
     deleteHandler(id){
-        let filterID = item => item.id !== id;
-        let filteredList = this.state.todos.filter(filterID);
-        this.setState({
-            todos: [...filteredList]
-        })
+        axios.delete(`http://localhost:8080/api/todo/${id}`)
+            .then((response) => {
+                console.log(response)
+                let filterID = item => item._id !== id;
+                let filteredList = this.state.todos.filter(filterID);
+                this.setState({
+                    todos: [...filteredList]
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     markHandler(id){
-        // let filterID = item => item.id !== id;
-        // let filterIDInvert = item => item.id === id;
-
-        // let filteredList = this.state.todos.filter(filterID);
-        // let item = this.state.todos.filter(filterIDInvert);
-
-        // item[0].done = true;
         let list = [...this.state.todos];
 
         list.forEach(item => {
-            if(item.id === id){
+            if(item._id === id){
                 if(item.done) item.done = false;
                 else item.done = true;
+                axios.put(`http://localhost:8080/api/todo/${id}`, { done: item.done })
+                    .then((response) => {
+                        this.setState({
+                            todos: [...list]
+                        })
+                        console.log(response)
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
             }
-        })
-        this.setState({
-            todos: [...list]
-        })
+        })        
     }
 
     createChangeHandler(event){
@@ -66,18 +57,34 @@ class List extends Component {
 
     createTodo(event){
         if (this.state.searchbar !== ""){
-            let newTodos = [...this.state.todos];
-            newTodos.push({
-                id: uuidv4(),
-                text: this.state.searchbar,
-                done: false
-            });
-            this.setState({
-                searchbar: '',
-                todos: [...newTodos]
-            })
+            axios.post('http://localhost:8080/api/todo/', { data: this.state.searchbar })
+                .then((response) => {
+                    let newTodos = [...this.state.todos];
+                    newTodos.push({
+                        _id: response.data._id,
+                        data: this.state.searchbar,
+                        done: false
+                    });
+                    this.setState({
+                        searchbar: '',
+                        todos: [...newTodos]
+                    })
+                    console.log(response)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
         }
         event.preventDefault();
+    }
+    
+    componentDidMount(){
+        axios.get('http://localhost:8080/api/todo/')
+            .then((response, reject) => {
+                this.setState({
+                    todos: [...response.data]
+                })
+            })
     }
 
     render(){
@@ -93,14 +100,14 @@ class List extends Component {
                     <input type="submit" value="Create" onClick={this.createTodo}/>
                 </div>
                 
-                {this.state.todos.filter(item => item.text.toLowerCase().includes(this.state.searchbar.toLowerCase())).map(item => {
+                {this.state.todos.filter(item => item.data.toLowerCase().includes(this.state.searchbar.toLowerCase())).map(item => {
                     return(
                         <ListItem
-                            key={item.id}
-                            text={item.text}
+                            key={item._id}
+                            text={item.data}
                             done={item.done}
-                            deleteHandler={() => this.deleteHandler(item.id)}
-                            markHandler={() => this.markHandler(item.id)}
+                            deleteHandler={() => this.deleteHandler(item._id)}
+                            markHandler={() => this.markHandler(item._id)}
                         />
                     )
                 })}

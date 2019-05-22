@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './ListItem.css';
 
 class ListItem extends Component {
-    constructor(props){
-        super(props);
-    }
+    // constructor(props){
+    //     super(props);
+    // }
 
     render(){
         let text;
