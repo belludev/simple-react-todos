@@ -48,9 +48,9 @@
 }
 .item-text.done{
     background-image: url('./check.png');
-    background-size: auto 110%;
+    background-size: auto 30px;
     background-repeat: no-repeat;
-    background-position: left center;
+    background-position: 18px;
     background-color: rgb(168, 227, 168) !important;
 }
 .item:nth-child(odd) .item-text.done{
