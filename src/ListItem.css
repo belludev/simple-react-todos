@@ -44,10 +44,27 @@
     font-size: 20px;
     border-left: 4px solid rgb(238, 238, 238);
 }
+.item-text.done{
+    background-color: rgb(168, 227, 168) !important;
+}
+.item:nth-child(odd) .item-text.done{
+    background-color: rgb(156, 210, 156) !important;
+}
 
 .item:nth-child(odd) .item-text{
     background-color: rgb(238, 238, 238);
 }
 .item:last-child .item-text{
     border-bottom: 4px solid rgb(238, 238, 238);
+}
+del{
+    text-decoration: none;
+    position: relative;
+    padding-left: 30px;
+}
+del:before{
+    content: '✅ ';
+    position: absolute;
+    left: 0;
+    top: -2px;
 }

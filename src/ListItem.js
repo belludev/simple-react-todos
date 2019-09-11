@@ -7,21 +7,25 @@ class ListItem extends Component {
     // }
 
     render(){
-        let text;
         if(this.props.done){
-            text = <del>{this.props.text}</del>
-        }else{
-            text = this.props.text;
-        }
-
-        return(
-            <div className="item">
-                <div className="item-text" onClick={this.props.markHandler}>
-                    {text}
+            return(
+                <div className="item">
+                    <div className="item-text done" onClick={this.props.markHandler}>
+                        <del>{this.props.text}</del>
+                    </div>
+                    <div className="delete-button" onClick={this.props.deleteHandler}>Delete</div>
                 </div>
-                <div className="delete-button" onClick={this.props.deleteHandler}>Delete</div>
-            </div>
-        )
+            )
+        }else{
+            return(
+                <div className="item">
+                    <div className="item-text" onClick={this.props.markHandler}>
+                        {this.props.text}
+                    </div>
+                    <div className="delete-button" onClick={this.props.deleteHandler}>Delete</div>
+                </div>
+            )
+        }
     }
 }
 
