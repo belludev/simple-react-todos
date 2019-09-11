@@ -1,6 +1,6 @@
 .item{
     display: grid;
-    grid-template-columns: 1fr 200px;
+    grid-template-columns: 1fr 70px;
     -webkit-touch-callout: none;
     -webkit-user-select: none; 
     -khtml-user-select: none;
@@ -17,6 +17,7 @@
     font-size: 20px;
     font-weight: bold;
     transition: background-color ease 200ms;
+    font-size: 24px;
 }
 .delete-button:hover{
     background-color: rgb(189, 0, 0);

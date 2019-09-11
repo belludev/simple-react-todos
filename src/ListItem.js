@@ -13,7 +13,7 @@ class ListItem extends Component {
                     <div className="item-text done" onClick={this.props.markHandler}>
                         <del>{this.props.text}</del>
                     </div>
-                    <div className="delete-button" onClick={this.props.deleteHandler}>Delete</div>
+                    <div className="delete-button" onClick={this.props.deleteHandler}>&times;</div>
                 </div>
             )
         }else{
@@ -22,7 +22,7 @@ class ListItem extends Component {
                     <div className="item-text" onClick={this.props.markHandler}>
                         {this.props.text}
                     </div>
-                    <div className="delete-button" onClick={this.props.deleteHandler}>Delete</div>
+                    <div className="delete-button" onClick={this.props.deleteHandler}>&times;</div>
                 </div>
             )
         }
