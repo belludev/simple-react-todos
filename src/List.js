@@ -97,7 +97,7 @@ class List extends Component {
                         onChange={this.createChangeHandler}
                         placeholder="Todo"
                     />
-                    <input type="submit" value="Create" onClick={this.createTodo}/>
+                    <input type="submit" value="+" onClick={this.createTodo}/>
                 </div>
                 
                 {this.state.todos.filter(item => item.data.toLowerCase().includes(this.state.searchbar.toLowerCase())).map(item => {

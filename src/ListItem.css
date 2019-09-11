@@ -18,6 +18,7 @@
     font-weight: bold;
     transition: background-color ease 200ms;
     font-size: 24px;
+    
 }
 .delete-button:hover{
     background-color: rgb(189, 0, 0);
@@ -28,15 +29,15 @@
 }
 
 
-.item:nth-child(even) .delete-button{
+.item:nth-child(odd) .delete-button{
     background-color: rgb(175, 0, 0);
 }
 
-.item:nth-child(even) .delete-button:hover{
+.item:nth-child(odd) .delete-button:hover{
     background-color: rgb(138, 0, 0);
 }
 
-.item:nth-child(even) .delete-button:hover{
+.item:nth-child(odd) .delete-button:hover{
     background-color: rgb(124, 0, 0);
 }
 
@@ -46,6 +47,10 @@
     border-left: 4px solid rgb(238, 238, 238);
 }
 .item-text.done{
+    background-image: url('./check.png');
+    background-size: auto 110%;
+    background-repeat: no-repeat;
+    background-position: left center;
     background-color: rgb(168, 227, 168) !important;
 }
 .item:nth-child(odd) .item-text.done{
@@ -61,11 +66,11 @@
 del{
     text-decoration: none;
     position: relative;
-    padding-left: 30px;
+    padding-left: 45px;
 }
-del:before{
+/* del:before{
     content: '✅ ';
     position: absolute;
     left: 0;
     top: -2px;
-}
+} */
